@@ -25,7 +25,7 @@ router.post('/register', (req, res) => {
         insertTodo.run(result.lastInsertRowid, defaultTodo)
 
         // create a token
-        const token = jwt.sign({ id: result.lastInsertRowid }, process.env.JWT_SECRET, { expiresIn: '5s' })
+        const token = jwt.sign({ id: result.lastInsertRowid }, process.env.JWT_SECRET, { expiresIn: '24h' })
         res.json({ token })
     } catch (err) {
         console.log(err.message)
@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
         console.log(user)
 
         // then we have a successful authentication
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '5s' })
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' })
         res.json({ token })
     } catch (err) {
         console.log(err.message)
